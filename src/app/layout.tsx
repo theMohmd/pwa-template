@@ -9,15 +9,16 @@ export const viewport: Viewport = {
   minimumScale: 1,
   initialScale: 1,
   width: "device-width",
-  viewportFit: "cover",
+  height: "device-height",
+  viewportFit: "contain",
 };
 
 export const metadata: Metadata = {
-  title: "Ledger",
-  description: "A personal finance app",
+  title: "Pwa",
+  description: "A Progressive Web App built with Next.js",
   generator: "Next.js",
   manifest: "/manifest.json",
-  keywords: ["Ledger", "finance", "pwa", "next-pwa"],
+  keywords: ["pwa", "next-pwa"],
   authors: [
     {
       name: "the Mohmd",
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   ],
   icons: [
     { rel: "apple-touch-icon", url: "apple-icon.png" },
-    { rel: "icon", url: "favicon.ico" },
+    { rel: "icon", url: "icon-512.png" },
   ],
 };
 
