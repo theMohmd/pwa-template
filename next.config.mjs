@@ -39,6 +39,24 @@ export default withPWA({
 
 	// Runtime caching strategies
 	runtimeCaching: [
+		// Cache static assets (e.g., CSS, JS, images, fonts) using StaleWhileRevalidate strategy
+		{
+			// Match common static file types (images, fonts, stylesheets, etc.)
+			urlPattern:
+				/.*\.(html|css|js|ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$/,
+			// Serve from cache while updating the cache in the background (StaleWhileRevalidate)
+			handler: "StaleWhileRevalidate",
+			options: {
+				// Cache name specific to static assets
+				cacheName: `static-${BUILD_TIME}`,
+				expiration: {
+					// Limit the number of cached static assets (max 50 entries)
+					maxEntries: 50,
+					// Cache duration: 30 days
+					maxAgeSeconds: 60 * 60 * 24 * 30,
+				},
+			},
+		},
 		// Background Sync for API requests (Ensures failed requests retry when the user goes back online)
 		{
 			// Match all API requests (e.g., /api/*)
@@ -63,24 +81,6 @@ export default withPWA({
 						// Retry failed API requests for up to 1 hour
 						maxRetentionTime: 60 * 60,
 					},
-				},
-			},
-		},
-		// Cache static assets (e.g., CSS, JS, images, fonts) using StaleWhileRevalidate strategy
-		{
-			// Match common static file types (images, fonts, stylesheets, etc.)
-			urlPattern:
-				/\.(css|js|ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$/,
-			// Serve from cache while updating the cache in the background (StaleWhileRevalidate)
-			handler: "StaleWhileRevalidate",
-			options: {
-				// Cache name specific to static assets
-				cacheName: `static-${BUILD_TIME}`,
-				expiration: {
-					// Limit the number of cached static assets (max 50 entries)
-					maxEntries: 50,
-					// Cache duration: 30 days
-					maxAgeSeconds: 60 * 60 * 24 * 30,
 				},
 			},
 		},
