@@ -55,7 +55,7 @@ const TodoPage = () => {
 
   return (
     <div className="h-screen flex items-center justify-center ">
-      <div className="max-w-lg mx-auto p-6 bg-neutral-900 rounded-lg shadow-lg">
+      <div className="max-w-lg mx-auto p-6 rounded-lg shadow-lg">
         <h1 className="text-3xl font-semibold text-center mb-6 text-neutral-100">
           To-Do List
         </h1>
@@ -63,7 +63,7 @@ const TodoPage = () => {
         <div className="flex mb-6">
           <input
             type="text"
-            className="flex-1 p-3 border border-neutral-800 rounded-l-lg text-neutral-100 bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-700"
+            className="flex-1 p-3 border border-neutral-900 rounded-l-lg text-neutral-100 bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-700"
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
             placeholder="Add a new todo"
@@ -80,7 +80,7 @@ const TodoPage = () => {
           {todos.map((todo) => (
             <li
               key={todo.id}
-              className={`flex bg-neutral-800 justify-between items-center p-4 mb-4 rounded-lg ${
+              className={`flex bg-neutral-900 justify-between items-center p-4 mb-4 rounded-lg ${
                 todo.completed && "[&_span]:line-through"
               }`}
             >
