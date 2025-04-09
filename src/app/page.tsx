@@ -11,18 +11,18 @@ export default function Home() {
       <div className="flex gap-4 items-center justify-center">
         <button
           onClick={() => setCounter((p) => p - 1)}
-          className="active:translate-y-1 hover:bg-purple-800/50 duration-200 bg-purple-600/50 p-4 rounded-md font-bold"
+          className="active:translate-y-1 hover:bg-emerald-800/50 duration-200 bg-emerald-600/50 p-4 rounded-md font-bold"
         >
           -
         </button>
 
-        <div className="bg-purple-600/50 p-4 rounded-md font-bold min-w-20 text-center">
+        <div className="bg-emerald-600/50 p-4 rounded-md font-bold min-w-20 text-center">
           {counter}
         </div>
 
         <button
           onClick={() => setCounter((p) => p + 1)}
-          className="active:translate-y-1 hover:bg-purple-800/50 duration-200 bg-purple-600/50 p-4 rounded-md font-bold"
+          className="active:translate-y-1 hover:bg-emerald-800/50 duration-200 bg-emerald-600/50 p-4 rounded-md font-bold"
         >
           +
         </button>
