@@ -63,7 +63,7 @@ const TodoPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-neutral-950 px-4 py-6 text-neutral-100">
+    <div className="min-h-dvh flex flex-col bg-neutral-950 px-4 py-6 text-neutral-100">
       <div className="text-center text-2xl font-bold mb-4">Todo</div>
 
       <div className="flex-1 overflow-y-auto pb-28">
