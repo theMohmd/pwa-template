@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   DragDropContext,
   Droppable,
@@ -35,6 +35,7 @@ const TodoPage = () => {
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Detect click outside of group dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -69,7 +70,6 @@ const TodoPage = () => {
     localStorage.setItem("collapsedGroups", JSON.stringify(collapsedGroups));
   }, [todos, groups, collapsedGroups]);
 
-  // Add task
   const addTodo = (text: string) => {
     const newTodo: Todo = {
       id: Date.now(),
@@ -80,7 +80,6 @@ const TodoPage = () => {
     setTodos((prev) => [...prev, newTodo]);
   };
 
-  // Add group
   const addGroup = (name: string) => {
     const newGroup = name.trim();
     if (!newGroup || groups.includes(newGroup)) return;
@@ -88,7 +87,6 @@ const TodoPage = () => {
     setSelectedGroup(newGroup);
   };
 
-  // Input enter handler
   const handleInputSubmit = () => {
     const trimmed = inputValue.trim();
     if (!trimmed) return;
@@ -102,7 +100,6 @@ const TodoPage = () => {
     setInputValue("");
   };
 
-  // Toggle todo complete
   const toggleCompletion = (id: number) => {
     setTodos((prev) =>
       prev.map((todo) =>
@@ -111,12 +108,10 @@ const TodoPage = () => {
     );
   };
 
-  // Delete todo
   const removeTodo = (id: number) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
-  // Collapse/expand group
   const toggleCollapse = (group: string) => {
     setCollapsedGroups((prev) => ({
       ...prev,
@@ -124,13 +119,11 @@ const TodoPage = () => {
     }));
   };
 
-  // DRAG & DROP HANDLER
   const handleDragEnd = (result: DropResult) => {
     const { source, destination, draggableId, type } = result;
 
     if (!destination) return;
 
-    // Reorder groups
     if (type === "group") {
       const newGroups = Array.from(groups);
       const [moved] = newGroups.splice(source.index, 1);
@@ -139,7 +132,6 @@ const TodoPage = () => {
       return;
     }
 
-    // Move or reorder todos
     const draggedTodoId = parseInt(draggableId);
     const draggedTodo = todos.find((t) => t.id === draggedTodoId);
     if (!draggedTodo) return;
@@ -163,10 +155,10 @@ const TodoPage = () => {
   };
 
   return (
-    <div className="min-h-dvh flex flex-col bg-neutral-950 px-4 py-6 text-neutral-100">
+    <div className="min-h-[100dvh] flex flex-col bg-neutral-950 px-4 py-6 text-neutral-100">
       <div className="text-center text-2xl font-bold mb-4">Todo</div>
 
-      <div className="flex-1 overflow-y-auto pb-40">
+      <div className="flex-1 overflow-y-auto pb-[140px]">
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="group-droppable" type="group">
             {(provided) => (
@@ -289,9 +281,9 @@ const TodoPage = () => {
         </DragDropContext>
       </div>
 
-      {/* BOTTOM BAR */}
+      {/* Bottom Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-neutral-900 border-t border-neutral-800 px-4 py-3 space-y-2 z-20">
-        {/* Custom Dropdown */}
+        {/* Group Dropdown */}
         <div className="relative mb-2" ref={dropdownRef}>
           <button
             onClick={() => setShowGroupDropdown((prev) => !prev)}
@@ -362,7 +354,7 @@ const TodoPage = () => {
                 handleInputSubmit();
               }
             }}
-            placeholder='New task or "Group/" to create group'
+            placeholder='New task or "GroupName/" to create group'
             className="flex-1 px-4 py-3 rounded-lg bg-neutral-800 text-neutral-100 placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-700"
           />
           <button
