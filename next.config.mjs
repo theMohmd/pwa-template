@@ -45,7 +45,7 @@ export default withPWA({
 			urlPattern:
 				/.*\.(html|css|js|ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$/,
 			// Serve from cache while updating the cache in the background (StaleWhileRevalidate)
-			handler: "StaleWhileRevalidate",
+			handler: "CacheFirst",
 			options: {
 				// Cache name specific to static assets
 				cacheName: `static-${BUILD_TIME}`,
