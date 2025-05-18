@@ -1,5 +1,6 @@
 import { Metadata, Viewport } from "next";
 import "./globals.css";
+import Link from "next/link";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -38,7 +39,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="flex flex-col">
+        <div className="p-2 flex gap-2 border-b border-neutral-800">
+          <Link className="px-4 py-1 text-sm font-bold bg-neutral-800 rounded-sm" href="/">Note</Link>
+          <Link className="px-4 py-1 text-sm font-bold bg-neutral-800 rounded-sm" href="/track">Track</Link>
+        </div>
+        <div className="grow">{children}</div>
+      </body>
     </html>
   );
 }
